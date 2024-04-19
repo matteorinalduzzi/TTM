@@ -15,7 +15,7 @@ Such study is a two-step process, according to [ISPRA](https://www.venezia.ispra
 
 By combining these methods, scientists can provide accurate short-term forecasts (12-48 hours) and a general idea of the tide's direction over longer periods (3-5 days). 
 
-In this context, we would liek to explore multivariate time series modeling. This approach considers multiple factors that influence tides, not just astronomical cycles but also meteorological factors such as:
+In this context, we explore multivariate time series modeling. This approach considers multiple factors that influence tides, not just astronomical cycles but also meteorological factors such as:
 
 - Wind speed and direction
 - Atmospheric pressure
