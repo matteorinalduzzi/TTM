@@ -68,23 +68,90 @@ Predicting tide levels in the Venice Lagoon is a prime example perfectly suited 
 By analyzing historical data on tide levels, wind patterns, and atmospheric pressure (exogenous variables), time series models can provide accurate predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
 
 
+
+
+## Model Development with TSFM
+
+TSFM offer an appealing toolkit for building efficient time series forecasting models. We briefly discuss how we leverage TSFM to construct a model for predicting Venetian Lagoon tide levels.
+
+TTM follows a multi-level architecture designed for flexibility and efficiency in various time series forecasting tasks (see Figure 1(a) in the [reference paper](https://arxiv.org/pdf/2401.03955.pdf)) and appears to be well-suited for problems like tide level forecasting where astronomical cycles and past weather patterns influence future water levels. 
+
+The idea is to include several relevant factors from the retrieved datasets, beyond tide level data, as input features for the model. These features encompass:
+
+- Wind speed and direction
+- Atmospheric pressure
+- Air temperature
+- Rainfall (if data is available and deemed statistically significant)
+
+By incorporating these exogenous variables, the model can paint a more comprehensive picture of the forces affecting the lagoon's water level and enhance prediction accuracy.
+
+
 ## Data Acquisition and Preprocessing
 
-* Explain the source of the data used for model training. In this case, mention the official portal of the City of Venice for tide level data. 
-* Briefly describe the datasets retrieved from that will be used for the additional factors influencing tides (wind speed, atmospheric pressure, etc.). 
-* Explain any necessary preprocessing steps like handling missing values, scaling, and time-series transformation (if needed).
+The data for this project will be primarily sourced from the **Area Maree e Lagune** (Tide and Lagoon Area) of the **Istituto Superiore per la Protezione e la Ricerca Ambientale** (ISPRA) in Italy. ISPRA is a renowned research institute responsible for monitoring and managing water resources in Italy.
+
+Specifically, we will utilize data from ISPRA's **Rete Mareografica Lagunare di Venezia** (Venetian Lagoon Tide Gauge Network, RMLV). This network comprises 29 weather-tide gauge stations strategically located throughout the Venetian Lagoon and along the Upper Adriatic coast. These stations are equipped with advanced electronic equipment adhering to international standards set by organizations like the World Meteorological Organization (WMO) and the Intergovernmental Oceanographic Commission (IOC).
+
+The RMLV provides a wealth of data, including:
+
+* **Sea level measurements:** Continuously recorded sea level data at all 29 stations, providing a detailed picture of water level fluctuations in the lagoon.
+
+* **Meteorological data:** Selected stations measure additional parameters like wind direction and speed, atmospheric pressure, precipitation, air temperature, relative humidity, solar radiation, and wave motion.
+
+* **GPS data:** Three key stations (Punta della Salute, Lido Diga Sud, and Grado) are equipped with co-located tide gauges and GPS receivers. This dual setup enables simultaneous monitoring of both relative sea level changes (tide gauge) and vertical land movement (GPS) at these locations.
+
+ISPRA's central office facilitates real-time data exchange with other meteorological and marine networks operated by ISPRA (nationwide), the Municipality of Venice (CPSM), ARPA Veneto, ARPA Friuli Venezia Giulia, and ARPA Emilia Romagna. This collaboration fosters a comprehensive hydrological monitoring framework for the entire Upper Adriatic region.
+
+The data collected by the RMLV serves various purposes, including:
+
+* **Daily Tide Bulletin:** Generation and dissemination of the daily Tide Bulletin, providing real-time and forecasted tide information for the Venetian Lagoon.
+
+* **Exceptional Tide Forecasting:** Development of forecasts for exceptional tides (acqua alta) events, enabling proactive measures to mitigate their impacts.
+
+* **Data Analysis and Research:** Comprehensive analysis of tide and meteorological data to understand long-term sea level changes, extreme events, and other phenomena relevant to coastal management and the protection of Venice from high tides.
+
+The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
+
+Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook code. The code snippet demonstrates how to load each dataset and merge them into a unified DataFrame named `df_venice` for further analysis and model training.
+
+This Jupyter Notebook is designed to load and process data for predicting Venetian Lagoon tide levels. Here's a breakdown of the code:
+
+**1. Importing Library:**
+
+The code likely starts by importing the `pandas` library (usually denoted as `pd`) for data manipulation.
+
+**2. Loading Data (Tide Level by Year):**
+
+- The code iterates through years (2020, 2021, 2022 for this example) to load separate CSV files containing tide level data for each year.
+- `pd.read_csv` function is used, specifying file path, separator (';'), column names, and dropping unnecessary columns (`'A'`, `'DUMMY'`).
+- Data for each year is stored in a separate DataFrame (e.g., `df_level_2020`).
+- DataFrames for each year are then concatenated using `pd.concat` to create a single DataFrame `df_level` containing all tide level data for the three years.
+
+**3. Loading Data (Other Factors by Year):**
+
+- The code follows a similar approach as with tide levels to load data for wind speed, direction, pressure, temperature, and rain.
+- Separate DataFrames are created for each factor (`df_windsp`, `df_winddir`, `df_press`, `df_temp`, `df_rain`) for each year and then concatenated into single DataFrames for all years.
+
+**4. Merging Data:**
+
+- A comment block highlights the section for merging all the data.
+- The current code demonstrates merging the tide level data (`df_level`) with pressure data (`df_press`) using the `pd.merge` function based on a common column (`"DATE"`). This process would be repeated to merge wind direction, wind speed, temperature, and rain DataFrames.
+
+**5. Final Data Processing and Export:**
+
+- The merged DataFrame (`df_venice`) is displayed using `head()` to show the first few rows.
+- The `DATE` column is converted to datetime format using `pd.to_datetime`.
+- Two versions of the data are created:
+   - `df_venice`: Contains all data points.
+   - `df_venice_small`: Filters the data to include only rows where the minute value in the "DATE" column is either 0 or 30 (potentially keeping data for every 30 minutes).
+- Both DataFrames are exported as CSV files (`'venice.csv'` and `'venice_small.csv'`) for use in the training phase.
+
 
 ## Leveraging watson ML environments for running the model
 
 * Explain how to go from the cloning the code repository to creating a service to run the IBM Cloud
 * Discuss benefits of such environment such as governance, dataset assets...
 
-## Model Development with TSFM
-
-* Briefly introduce the Time Series Foundation Models (TSFM) from the TTM library. 
-* Explain the chosen TSFM architecture for the model (e.g., Informer, Transformer). 
-* Describe the process of feature selection: which factors from the retrieved datasets will be included as input features besides tide levels.
-* Explain the model training process, including hyperparameter tuning (if applicable).
 
 ## Model Evaluation and Results
 
