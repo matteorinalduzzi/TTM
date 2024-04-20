@@ -1,3 +1,2 @@
 .DS_Store
-tsfm/*
-!tsfm/ttm_finetuned_models
+/tsfm
