@@ -109,13 +109,11 @@ The data collected by the RMLV serves various purposes, including:
 
 The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
 
-Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook code. The code snippet demonstrates how to load each dataset and merge them into a unified DataFrame named `df_venice` for further analysis and model training.
-
-This Jupyter Notebook is designed to load and process data for predicting Venetian Lagoon tide levels. Here's a breakdown of the code:
+Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook code. The provided Jupyter Notebook in ther dataset/venice directory demonstrates how to load each dataset and merge them into a unified DataFrame named `df_venice` for further analysis and model training. Here's a breakdown of the code:
 
 **1. Importing Library:**
 
-The code likely starts by importing the `pandas` library (usually denoted as `pd`) for data manipulation.
+The code starts by importing the `pandas` library (usually denoted as `pd`) for data manipulation.
 
 **2. Loading Data (Tide Level by Year):**
 
