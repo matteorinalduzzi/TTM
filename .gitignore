@@ -1,3 +1,4 @@
 *.DS_Store
 /tsfm
 *logs
+datasets/venice/.DS_Store
