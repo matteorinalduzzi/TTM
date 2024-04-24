@@ -129,6 +129,7 @@ The notebook performs the following steps:
    * Checks for missing values and calculates the percentage of missing values for each column.
    * Creates area plots to visualize the data for each weather variable.
 5. **Fills Missing Values:**
+   * It drops all the rows where the dataset is missing LEVEL data.
    * It defines a function `fill_missing_values` to replace missing values. This function considers the day of the year and retrieves the mean value from similar days in other years. If no suitable value is found within a specified window, it generates a random value between the minimum and maximum values observed during that window. 
    * It applies the `fill_missing_values` function to specific columns (LEVEL, WSPEED, WDIR, TEMP) with a window of 7 days. For RAIN, it sets missing values to zero.
 6. **Creates Resulting Files:**
