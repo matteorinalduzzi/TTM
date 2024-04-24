@@ -1,0 +1,51 @@
+{
+  "best_metric": NaN,
+  "best_model_checkpoint": "ttm_finetuned_models/venice/output/checkpoint-13",
+  "epoch": 2.0,
+  "eval_steps": 500,
+  "global_step": 26,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 1.0,
+      "grad_norm": NaN,
+      "learning_rate": 5.059716525012607e-05,
+      "loss": 0.0,
+      "step": 13
+    },
+    {
+      "epoch": 1.0,
+      "eval_loss": NaN,
+      "eval_runtime": 54.4335,
+      "eval_samples_per_second": 46.552,
+      "eval_steps_per_second": 0.735,
+      "step": 13
+    },
+    {
+      "epoch": 2.0,
+      "grad_norm": NaN,
+      "learning_rate": 8.192074470326073e-05,
+      "loss": 0.0,
+      "step": 26
+    },
+    {
+      "epoch": 2.0,
+      "eval_loss": NaN,
+      "eval_runtime": 53.5901,
+      "eval_samples_per_second": 47.285,
+      "eval_steps_per_second": 0.746,
+      "step": 26
+    }
+  ],
+  "logging_steps": 500,
+  "max_steps": 650,
+  "num_input_tokens_seen": 0,
+  "num_train_epochs": 50,
+  "save_steps": 500,
+  "total_flos": 44944449208320.0,
+  "train_batch_size": 64,
+  "trial_name": null,
+  "trial_params": null
+}
