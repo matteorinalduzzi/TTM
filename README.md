@@ -109,38 +109,32 @@ The data collected by the RMLV serves various purposes, including:
 
 The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
 
-Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook code. The provided Jupyter Notebook in ther dataset/venice directory demonstrates how to load each dataset and merge them into a unified DataFrame named `df_venice` for further analysis and model training. Here's a breakdown of the code:
+Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook thet merges weather data from several datasets for the city of Venice covering years from 2020 to 2022. The datasets include:
 
-**1. Importing Library:**
+* Level
+* Wind Speed
+* Wind Direction
+* Pressure
+* Temperature
+* Rain
 
-The code starts by importing the `pandas` library (usually denoted as `pd`) for data manipulation.
+The notebook performs the following steps:
 
-**2. Loading Data (Tide Level by Year):**
-
-- The code iterates through years (2020, 2021, 2022 for this example) to load separate CSV files containing tide level data for each year.
-- `pd.read_csv` function is used, specifying file path, separator (';'), column names, and dropping unnecessary columns (`'A'`, `'DUMMY'`).
-- Data for each year is stored in a separate DataFrame (e.g., `df_level_2020`).
-- DataFrames for each year are then concatenated using `pd.concat` to create a single DataFrame `df_level` containing all tide level data for the three years.
-
-**3. Loading Data (Other Factors by Year):**
-
-- The code follows a similar approach as with tide levels to load data for wind speed, direction, pressure, temperature, and rain.
-- Separate DataFrames are created for each factor (`df_windsp`, `df_winddir`, `df_press`, `df_temp`, `df_rain`) for each year and then concatenated into single DataFrames for all years.
-
-**4. Merging Data:**
-
-- A comment block highlights the section for merging all the data.
-- The current code demonstrates merging the tide level data (`df_level`) with pressure data (`df_press`) using the `pd.merge` function based on a common column (`"DATE"`). This process would be repeated to merge wind direction, wind speed, temperature, and rain DataFrames.
-
-**5. Final Data Processing and Export:**
-
-- The merged DataFrame (`df_venice`) is displayed using `head()` to show the first few rows.
-- The `DATE` column is converted to datetime format using `pd.to_datetime`.
-- Two versions of the data are created:
-   - `df_venice`: Contains all data points.
-   - `df_venice_small`: Filters the data to include only rows where the minute value in the "DATE" column is either 0 or 30 (potentially keeping data for every 30 minutes).
-- Both DataFrames are exported as CSV files (`'venice.csv'` and `'venice_small.csv'`) for use in the training phase.
-
+1. **Loads the data:** It reads each weather dataset from a separate CSV file using pandas. Each file is assumed to have a specific format with a semicolon (';') as the delimiter and a header row with specific column names. 
+2. **Processes the data:**
+   * Drops unnecessary columns
+   * Converts the 'DATE' column to datetime format
+3. **Merges the data:** It creates a new DataFrame named `df_venice` with timestamps at 5-minute intervals spanning from January 1st, 2020 to December 31st, 2022. It then merges this DataFrame with each weather dataset using the 'DATE' column as the common key. Outer joins are used to ensure all data points are included even if missing from some datasets.
+4. **Verifies and Plots the Data:**
+   * Checks for missing values and calculates the percentage of missing values for each column.
+   * Creates area plots to visualize the data for each weather variable.
+5. **Fills Missing Values:**
+   * It defines a function `fill_missing_values` to replace missing values. This function considers the day of the year and retrieves the mean value from similar days in other years. If no suitable value is found within a specified window, it generates a random value between the minimum and maximum values observed during that window. 
+   * It applies the `fill_missing_values` function to specific columns (LEVEL, WSPEED, WDIR, TEMP) with a window of 7 days. For RAIN, it sets missing values to zero.
+6. **Creates Resulting Files:**
+   * It creates two CSVs:
+      * `venice.csv`: Contains all data at 5-minute intervals.
+      * `venice_small.csv`: Contains a subset of the data with entries only for every hour (i.e., where the minute of the 'DATE' is 0).
 
 ## Leveraging watson ML environments for running the model
 
