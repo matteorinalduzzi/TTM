@@ -109,33 +109,17 @@ The data collected by the RMLV serves various purposes, including:
 
 The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
 
-Fortunately, the data downloaded from ISPRA's RMLV network is already preprocessed and quality-controlled. This eliminates the need for extensive cleaning steps on our end, allowing us to seamlessly integrate it into our pipeline using the provided Python Jupyter Notebook thet merges weather data from several datasets for the city of Venice covering years from 2020 to 2022. The datasets include:
+We provide a Jupyter Notebook designed to merge weather data from multiple datasets for the city of Venice, covering the years 2020 to 2022. The data includes level, wind speed, wind direction, pressure, temperature, and rain. The notebook leverages preprocessed and quality-controlled data downloaded from ISPRA's RMLV network, eliminating the need for extensive cleaning steps.
 
-* Level
-* Wind Speed
-* Wind Direction
-* Pressure
-* Temperature
-* Rain
+The provided Python code performs the following steps:
 
-The notebook performs the following steps:
-
-1. **Loads the data:** It reads each weather dataset from a separate CSV file using pandas. Each file is assumed to have a specific format with a semicolon (';') as the delimiter and a header row with specific column names. 
-2. **Processes the data:**
-   * Drops unnecessary columns
-   * Converts the 'DATE' column to datetime format
-3. **Merges the data:** It creates a new DataFrame named `df_venice` with timestamps at 5-minute intervals spanning from January 1st, 2020 to December 31st, 2022. It then merges this DataFrame with each weather dataset using the 'DATE' column as the common key. Outer joins are used to ensure all data points are included even if missing from some datasets.
-4. **Verifies and Plots the Data:**
-   * Checks for missing values and calculates the percentage of missing values for each column.
-   * Creates area plots to visualize the data for each weather variable.
-5. **Fills Missing Values:**
-   * It drops all the rows where the dataset is missing LEVEL data.
-   * It defines a function `fill_missing_values` to replace missing values. This function considers the day of the year and retrieves the mean value from similar days in other years. If no suitable value is found within a specified window, it generates a random value between the minimum and maximum values observed during that window. 
-   * It applies the `fill_missing_values` function to specific columns (LEVEL, WSPEED, WDIR, TEMP) with a window of 7 days. For RAIN, it sets missing values to zero.
-6. **Creates Resulting Files:**
-   * It creates two CSVs:
-      * `venice.csv`: Contains all data at 5-minute intervals.
-      * `venice_small.csv`: Contains a subset of the data with entries only for every hour (i.e., where the minute of the 'DATE' is 0).
+1. **Loads data:** It retrieves data from various folders, each containing data for a specific weather parameter (e.g., level, temperature) for each year.
+2. **Merges data:** The datasets are merged into a single DataFrame using the 'DATE' column as the common key.
+3. **Sorts and cleans data:** The merged DataFrame is sorted by date and has unnecessary columns removed.
+4. **Analyzes data:** It creates a table to identify columns containing missing or zero values and their percentages.
+5. **Plots data:** The data is visualized using area plots to analyze trends across different weather parameters.
+6. **Fills missing data:** The code fills missing temperature values using the mean temperature for the corresponding time slot (month, day, hour, and minute) based on the available data.
+7. **Creates output files:** Finally, the notebook generates two CSV files: 'venice.csv' containing all data points and 'venice_small.csv' containing data points where the minute is either 0 or 30. 
 
 ## Leveraging watson ML environments for running the model
 
