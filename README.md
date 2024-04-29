@@ -109,17 +109,35 @@ The data collected by the RMLV serves various purposes, including:
 
 The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
 
-We provide a Jupyter Notebook designed to merge weather data from multiple datasets for the city of Venice, covering the years 2020 to 2022. The data includes level, wind speed, wind direction, pressure, temperature, and rain. The notebook leverages preprocessed and quality-controlled data downloaded from ISPRA's RMLV network, eliminating the need for extensive cleaning steps.
+We provide a Jupyter Notebook designed to merge weather data from multiple datasets for the city of Venice, covering the years 2020 to 2022. The data includes level, wind speed, wind direction, pressure, temperature, and rain. The notebook leverages preprocessed and quality-controlled data downloaded from ISPRA's RMLV network, eliminating the need for extensive cleaning steps. The data is assumed to be spread across multiple text files, one for each year, and stored in separate directories based on the weather parameter (e.g., level, pressure, rain, etc.). 
 
-The provided Python code performs the following steps:
+The notebook performs the following steps:
 
-1. **Loads data:** It retrieves data from various folders, each containing data for a specific weather parameter (e.g., level, temperature) for each year.
-2. **Merges data:** The datasets are merged into a single DataFrame using the 'DATE' column as the common key.
-3. **Sorts and cleans data:** The merged DataFrame is sorted by date and has unnecessary columns removed.
-4. **Analyzes data:** It creates a table to identify columns containing missing or zero values and their percentages.
-5. **Plots data:** The data is visualized using area plots to analyze trends across different weather parameters.
-6. **Fills missing data:** The code fills missing temperature values using the mean temperature for the corresponding time slot (month, day, hour, and minute) based on the available data.
-7. **Creates output files:** Finally, the notebook generates two CSV files: 'venice.csv' containing all data points and 'venice_small.csv' containing data points where the minute is either 0 or 30. 
+1. **Imports and Definitions:**
+   - Necessary libraries like pandas are imported.
+   - A dictionary, `dataset_info`, is created to specify the directory location and column name for each weather parameter.
+   - A helper function, `load_datasets`, is defined to load data from a specific year and directory. It handles potential file exceptions and performs basic cleaning tasks.
+
+2. **Load and Merge Data:**
+   - Each weather dataset is loaded using the `load_datasets` function.
+   - An empty DataFrame, `df_venice`, is initialized to store the merged data.
+   - DataFrames are progressively merged on the 'DATE' column, resulting in a combined DataFrame containing all weather parameters.
+
+3. **Verify and Plot Data:**
+   - A function, `missing_zero_values_table`, is used to identify columns with missing or zero values and their respective percentages.
+   - Area plots are generated to visualize the variations in each weather parameter over time.
+
+4. **Fill Missing Temperature Data:**
+   - A function, `fill_missing_temperature`, is defined to address missing temperature values.
+   - It imputes missing values by leveraging the mean temperature for the corresponding date and time based on high-resolution timestamps.
+
+5. **Truncate for Continuous Dates:**
+   - Another function, `copy_rows_until_missing_date`, is defined to extract a subset of the data that ensures no missing 'DATE' values exist within a specified time interval (e.g., 5 minutes in this case).
+
+6. **Create Files:**
+   - Two CSVs are created:
+     - `venice.csv`: Contains the entire merged dataset.
+     - `venice_small.csv`: Contains a subset of the data where timestamps are restricted to every hour (i.e., minutes are either 0 or 30). 
 
 ## Leveraging watson ML environments for running the model
 
