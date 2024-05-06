@@ -1,6 +1,6 @@
 # Predicting Venetian Lagoon Tide Levels with Multivariate Time Series Modeling
 
-## Abstract: 
+## Abstract 
 This article explores the application of multivariate time series models for predicting tide levels in the Venice Lagoon. We leverage Time Series Foundation Models (TSFM) from the [TTM library](https://huggingface.co/ibm/TTM) to construct a robust model that incorporates various relevant factors. Furthermore we demonstrate how this time series model developed by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf) can be deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) in order to streamline the process and unlock additional benefits such as model governance. The model is trained on datasets retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica). 
 The article details the process of data acquisition, feature selection, and model development using TSFM. It then evaluates the model's performance in predicting tide levels and discusses the implications for flood forecasting and improved water management strategies in the Venice Lagoon. The code for implementing this approach is provided in a [Jupyter notebook](tsfm/ttm_venice_levels.ipynb). 
 **TODO: Add findings**
