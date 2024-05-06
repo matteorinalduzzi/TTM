@@ -19,14 +19,12 @@ Such study is a two-step process, according to [ISPRA](https://www.venezia.ispra
 
 By combining these methods, scientists can provide accurate short-term forecasts (12-48 hours) and a general idea of the tide's direction over longer periods (3-5 days). 
 
-In this context, we explore multivariate time series modeling. This approach considers multiple factors that influence tides, not just astronomical cycles but also meteorological factors such as:
+In this context, we explore the use of a foundational model specifically developed to handle time series data for predicting sea levels in the Venice Lagoon. Such an approach allow us to consider multiple factors that influences tides without directly handling the complex statistical tecniques that are usually associated with multivariate forecasting. In doing so, we leverage not only astronomical cycles but also meteorological factors such as:
 
 - Wind speed and direction
 - Atmospheric pressure
 - Temperature
-- Rain (?)
-
-By incorporating this additional data, the model can paint a more complete picture of the forces affecting the lagoon's water level. This potentially leads to more accurate forecasts and better preparedness for high tides in Venice.
+- Rain
 
 ## Time Series: a Powerful Tool for Forecasting
 
