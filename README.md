@@ -3,10 +3,10 @@
 ## Abstract 
 This article explores the application of foundation models for predicting tide levels in the Venice Lagoon.<br /><br />
 In particular, we leverage [Tiny Timeseries Mixers](https://huggingface.co/ibm/TTM), a family of foundational models for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demostrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain experties in action with ease.<br />
-Furthermore we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.<br /><br />The work leverages data retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica), two of the major institutional data providers for what concerns sea levels in the Venice Lagoon.<br />
+Furthermore we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.<br /><br />The work leverages data retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica), two of the major institutional data providers for what concerns sea levels in the Venice Lagoon.<br /><br />
 The article is developed as follows:<br />
 firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the tecniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.<br /><br />
-The code for implementing this approach is provided in a [Jupyter notebook](TTM/ttm_venice_levels.ipynb). 
+The code for implementing this approach is provided in a [Jupyter notebook](TTM/ttm_venice_levels.ipynb).<br /><br />
 **TODO: Add findings**
 
 ## Introduction
@@ -28,16 +28,19 @@ In this context, we explore the use of a foundational model specifically develop
 
 ## Time Series: a Powerful Tool for Forecasting
 
-A time series is a collection of data points indexed in chronological order. Imagine temperature readings taken every hour, or stock prices recorded daily - these are all examples of time series data. The power of time series analysis lies in its ability to exploit the inherent temporal relationships within the data for forecasting purposes. 
+Before diving into our project, it is useful to recall some of the basics of Time Series Analyis.<br /><br />
+Generally speaking, a time series is a collection of data points indexed in chronological order: imagine temperature readings taken every hour, or stock prices recorded daily - these are all examples of time series data. The power of Time Series Analysis lies in its ability to exploit the inherent temporal relationships within the data for forecasting purposes. 
 
-Time series can be applied in various forecasting problems:
+Time Series Analysis can be applied in various forecasting problems:
 
 * **Demand forecasting:** Businesses can predict future sales trends based on historical sales data, seasonality, and marketing campaigns. 
 * **Financial forecasting:** Investment firms can analyze past stock market movements to predict future trends and make informed investment decisions.
 * **Weather forecasting:** Meteorological agencies use time series models incorporating temperature, pressure, and humidity data to predict future weather patterns.
 * **Inventory management:** Retailers can optimize stock levels by forecasting future demand using historical sales data and lead times.
 
-Traditionally, moving averages and exponential smoothing were used for time series forecasting. However, the field has seen significant advancements with the rise of machine learning. Here are some cutting-edge models:
+Traditionally, models explointing moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analyis, hereafter we propose a brief summary of the main models usually encountered in this field:
+
+**rivedere i modelli, togliere reference ad articoli specifici**
 
 * **ARIMA (Autoregressive Integrated Moving Average):** This model captures trends and seasonality by analyzing past values and residuals from the data.
 
