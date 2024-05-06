@@ -143,13 +143,14 @@ The notebook performs the following steps:
 
 * Explain how to go from the cloning the code repository to creating a service to run the IBM Cloud
 * Discuss benefits of such environment such as governance, dataset assets...
-
-
+  
 ## Model Evaluation and Results
 
-* Describe the chosen metrics for evaluating the model's performance in predicting tide levels (e.g., Mean Squared Error, Root Mean Squared Error).
-* Present the achieved prediction accuracy and discuss the model's effectiveness.
-* Consider including visualizations like scatter plots or time series plots comparing predicted vs. actual tide levels.
+While this article explores the application of TSFM for Venetian tide level prediction, it's important to acknowledge that we are not aiming to redefine established tide prediction models or propose ourselves as domain experts in Venetian tides or in time series modeling. Our focus lies on demonstrating a real-world use case for TSFM and the TTM model by leveraging the watsonx.ai platform. 
+
+That being said, we can still evaluate the model's performance to assess its qualitative effectiveness in predicting tide levels by looking at the *Predicted* towards *True* plots created by the notebook. More in-depth discussions on the validity of the results and the application of the time series model should probably be carried with better subject matter expertise. **TODO: ADD DIAGRAMS**
+
+We acknowledge that further refinement might be necessary. This includes exploring additional factors that could influence tide levels and potentially investigating more advanced TSFM architectures for enhanced accuracy. We are open to suggestions from domain experts in tide prediction and water management in Venice. Sharing the code (via Jupyter Notebook) fosters transparency and encourages collaboration for future improvements.
 
 ## Discussion and Future Work
 
