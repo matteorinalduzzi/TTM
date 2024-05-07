@@ -6,7 +6,7 @@ In particular, we leverage [Tiny Timeseries Mixers](https://huggingface.co/ibm/T
 Furthermore we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.<br /><br />The work leverages data retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica), two of the major institutional data providers for what concerns sea levels in the Venice Lagoon.<br /><br />
 The article is developed as follows:<br />
 firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the tecniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.<br /><br />
-The code for implementing this approach is provided in a [Jupyter notebook](TTM/ttm_venice_levels.ipynb).<br /><br />
+The code for implementing this approach is provided in a [Jupyter notebook](ttm_venice_levels.ipynb).<br /><br />
 **TODO: Add findings**
 
 ## Introduction
