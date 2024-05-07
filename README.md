@@ -144,6 +144,11 @@ The notebook performs the following steps:
      - `venice.csv`: Contains the entire merged dataset.
      - `venice_small.csv`: Contains a subset of the data where timestamps are restricted to every hour (i.e., minutes are either 0 or 30). 
 
+**TO DO: Riportare in questo notebook la parte di data transformation elaborata all'interno del notebook di tsfm**
+
+## Model
+
+
 ## Leveraging watson ML environments for running the model
 
 * Explain how to go from the cloning the code repository to creating a service to run the IBM Cloud
