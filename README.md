@@ -7,7 +7,10 @@ Furthermore we demonstrate how such models can be easily deployed and run on the
 The article is developed as follows:<br />
 firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the tecniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.<br /><br />
 The code for implementing this approach is provided in a [Jupyter notebook](ttm_venice_levels.ipynb).<br /><br />
-**TODO: Add findings**
+Our aim with this article is to that this approach offers a promising solution for time series forecasting tasks, particularly when combined with a user-friendly platform like watsonx. Specifically:
+1. **Feasibility of data science project:**  A data science project leveraging publicly available data and open-source models (TTM by IBM Research) was created to predict tide levels in the Venice Lagoon. 
+2. **Effectiveness of WatsonX platform:** The IBM watsonx platform provided a convenient environment for running the model tuning and predictions. The platform facilitated easy integration with the GitHub repository and seamless import of necessary artifacts within the machine learning service. 
+
 
 ## Introduction
 
