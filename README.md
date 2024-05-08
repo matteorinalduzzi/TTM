@@ -182,9 +182,17 @@ We acknowledge that further refinement might be necessary. This includes explori
 
 ## Discussion and Future Work
 
-* Discuss the implications of this approach for flood forecasting and water management strategies in the Venice Lagoon.
-* Highlight the limitations of the model and potential areas for improvement (e.g., incorporating additional factors or using more advanced TSFM architectures).
-* Briefly discuss potential future work, such as exploring real-time forecasting applications or integrating the model with existing decision support systems.
+This work demonstrates the potential of TSFM models for predicting Venetian Lagoon tide levels. However, several avenues exist for further exploration and refinement.
+
+One key area for improvement lies in expanding the range of endogenous variables considered. By incorporating additional factors that may influence water levels, such as astronomical phenomena (e.g., lunar phases) or even seismic activity, we can potentially enhance the model's accuracy.  A crucial step would be to analyze the impact of each variable on the forecast and compare these findings with existing knowledge of the lagoon's physics. This would allow us to prioritize the most influential variables and tailor the model accordingly.
+
+Furthermore, a comprehensive evaluation comparing TSFM against other time series forecasting models (e.g., ARIMA, LSTMs) is necessary. This evaluation should consider not only accuracy scores but also computational power requirements. Identifying the optimal model in terms of accuracy and efficiency is crucial for real-world deployments.
+
+To achieve a more in-depth evaluation of the TSFM model itself, leveraging  domain expertise on Venetian tide level phenomena would be beneficial.  A thorough understanding of the cyclical and episodic events that influence the lagoon's water levels would enable the creation of relevant use cases to benchmark the model's performance against the actual tide prediction models currently in place. This would provide valuable insights into the strengths and weaknesses of the TSFM approach in this specific context.
+
+Finally, exploring advanced tuning strategies targeted at high-tide forecasting is an exciting avenue for future work. By focusing on this specific use case, we can potentially refine the TSFM model to deliver optimal results for accurately predicting these critical events. This could involve experimenting with hyperparameter optimization techniques or incorporating domain knowledge into the tuning process.
+
+In conclusion, this work establishes a foundation for utilizing TSFM models in Venetian Lagoon tide level prediction. By expanding the variable set, conducting comparative evaluations, and implementing targeted tuning strategies, we can further enhance the model's accuracy and effectiveness in this crucial application. 
 
 ## Conclusion
 
