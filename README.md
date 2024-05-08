@@ -196,8 +196,13 @@ In conclusion, this work establishes a foundation for utilizing TSFM models in V
 
 ## Conclusion
 
-* Summarize the key findings of the article, emphasizing the effectiveness of the TSFM-based model for predicting tide levels in the Venice Lagoon.
-* Restate the importance of accurate tide level prediction for the future of Venice.
+This article explored the application of Tiny Timeseries Mixers (TTM), a foundation model by IBM Research, for predicting tide levels in the Venice Lagoon. The project successfully demonstrated the feasibility of leveraging open-source models and publicly available data for time series forecasting tasks. Furthermore, the article showcased the IBM WatsonX platform's  capabilities for streamlining model development and deployment.
+
+The findings highlight the effectiveness of the TSFM-based model in predicting tide levels. This approach offers a promising solution, particularly when combined with a user-friendly platform like WatsonX. However, the importance of continuous improvement cannot be overstated.  
+
+Future work should focus on expanding the model's capabilities through a more comprehensive understanding of the Venice Lagoon's physics.  Incorporating additional relevant variables and analyzing their impact can lead to enhanced accuracy.  Additionally, a comparative evaluation against other time series forecasting models is essential to determine the optimal solution in terms of accuracy and computational efficiency. 
+
+Ultimately, the goal is to refine the TSFM model for the specific use case of high-tide forecasting. By leveraging domain expertise and exploring advanced tuning strategies, we can strive to achieve optimal results for this critically important application.  Accurate tide predictions are paramount for flood mitigation strategies and ensuring the safety of Venice and its inhabitants. This work paves the way for further advancements in time series forecasting models, fostering a future where real-time data analysis empowers informed decision-making.
 
 ## Appendix (Optional)
 
