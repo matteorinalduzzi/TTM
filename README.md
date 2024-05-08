@@ -41,22 +41,19 @@ Time Series Analysis can be applied in various forecasting problems:
 Traditionally, models explointing moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analyis, hereafter we propose a brief summary of the main models usually encountered in this field (for a comprehensive review see R.J. Hyndman and G. Athanasopoulos - "Forecasting: principles and
 practice" - OTexts: Melbourne, Australia, 2021, [available here](https://otexts.com/fpp3/)):
 
-* **AR (AutoRegressive) Models:**
+* **Exponential Smoothing:** a family of models which us a decay factor to give more weight to recent observations and less weight to older observations. This model is particularly used for short-term forecasting (e.g. financial time series, where short-term trends and patterns are of particular interest) 
 
-* **ARIMA (Autoregressive Integrated Moving Average):** This model captures trends and seasonality by analyzing past values and residuals from the data.
+* **AR (AutoRegressive) Models:** Autoregressive (AR) models uses past values of the time series to predict future values. The basic idea behind AR models is to use past values of our target variable as regressors for computing the next value of the target variable itself. The order of the autoregression (p) determines how many past values are used for the prediction of the next value
 
-  * **Autoregressive Integrated Moving Average (ARIMA) Model** by Hyndman, R.J. & Athanasopoulos, G. (2013) [available here](https://otexts.com/fpp3/). This is a comprehensive text  covering the theory and application of ARIMA models for time series forecasting.
-  * **Box-Jenkins methodology** by Wikipedia [see here](https://en.wikipedia.org/wiki/Box%E2%80%93Jenkins_method). This Wikipedia entry provides a concise overview of the Box-Jenkins methodology, a statistical framework for fitting ARIMA models to time series data.
+* **MA (Moving Average) Models:** Differently from AR models, Moving Average (MA) models use previous error terms to predict future values of the target variable. The order of the moving average (q) determines how many past values of the error terms are used for the forecast.
 
-* **Prophet:** Developed by Facebook, Prophet is a powerful tool that considers holidays, seasonality, and other user-defined regressors for improved forecasting accuracy.
+* **ARMA (Autoregressive Integrated Moving Average):** these models an Autoregressive component (AR) with a Moving Average one (MA). By combining these two techniques, the ARMA model can capture both short-term and long-term dependencies in stationary time series data, making it suitable for various applications such as stock price prediction, demand forecasting, and signal processing. The order of the model, denoted as (p, q), specifies the number of lagged terms used in the autoregressive and moving average components, where p represents the number of autoregressive terms and q represents the number of moving average terms.
 
-  * **Forecasting at Scale with Prophet** by Sean J. Taylor et al. (2017) [available here](https://arxiv.org/pdf/2005.07575). This is the original research paper by Facebook introducing Prophet, detailing its architecture and implementation.
-  * **Prophet: Forecasting Prophet** by Facebook [see here](https://github.com/facebook/prophet). This is the official documentation for Prophet from Facebook, providing a user guide and tutorials.
+* **ARIMA (Autoregressive Integrated Moving Average):**  ARIMA models are an extension of ARMA models that includes an additional integration term, which accounts for differencing in the time series data. Differencing is a technique used to make non-stationary time series stationary by removing trends and seasonality. By incorporating differencing into the model, ARIMA can handle more complex patterns and relationships in the data, making it particularly useful for time series data with missing values or outliers. 
 
-* **Deep Learning Techniques:** Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks are particularly adept at capturing complex temporal patterns in data, leading to highly accurate forecasts, especially for non-linear data.
+* **Deep Learning Architectures for TS Analysis:** Among the many deep learning applications to time series data developed in the last years, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks emerge as the two main architectures used in this field. These models are particularly suited for capturing complex temporal patterns in data, leading to highly accurate forecasts especially for non-linear data. 
 
-  * **Long Short-Term Memory Networks with Recurrent Neural Networks** by Sepp Hochreiter & Jürgen Schmidhuber (1997) [available here](https://deeplearning.cs.cmu.edu/S23/document/readings/LSTM.pdf). This is the seminal paper introducing Long Short-Term Memory (LSTM) networks, a specific type of RNN well-suited for time series forecasting.
-  * **Recurrent neural networks** by Wikipedia [see here](https://en.wikipedia.org/wiki/Recurrent_neural_network). This Wikipedia entry provides a general introduction to RNNs, including their architecture, training process, and applications beyond time series forecasting.
+* **Foundation Models for TS Analysis:** Recently, the rise of foundational models in various fields (notably NLP and Computer Vision) have brought interest in developing similar models and approaches in  time series analisys (e.g. [The Battle of time-series transforers](https://www.linkedin.com/pulse/ts-foundation-models-battle-time-series-vijay-ekambaram/)). In this context, IBM Research has  open-sourced Tiny Time Mixers, a class of models pre-trained on curated and diverse time series data that shows very good benchmark both on zero-shot inference and few-shot fine-tuning of the base model.
 
 When building a time series model, it's crucial to distinguish between two types of data: endogenous and exogenous variables.
 
@@ -71,13 +68,13 @@ Predicting tide levels in the Venice Lagoon is a prime example perfectly suited 
 * **Cyclical Nature:** Tides exhibit predictable daily and seasonal cycles that time series models can effectively capture.
 * **External Influences:** Meteorological factors like wind and atmospheric pressure significantly impact tide levels. Time series models can incorporate these external factors (exogenous variables) for more comprehensive forecasting.
 
-By analyzing historical data on tide levels, wind patterns, and atmospheric pressure (exogenous variables), time series models can provide accurate predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
+By analyzing historical data on wind patterns, rains' levels, temperature and atmospheric pressure (exogenous variables) as well as on the preavious sea levels (endogenous variable), time series models can provide predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
 
 ## Model Development with TSFM
 
-TSFM offer an appealing toolkit for building efficient time series forecasting models. We briefly discuss how we leverage TSFM to construct a model for predicting Venetian Lagoon tide levels.
+The [IBM TSFM library](https://github.com/ibm-granite/granite-tsfm/blob/main/README.md) offers an appealing toolkit for building efficient time series forecasting models. We briefly discuss how we leverage TSFM to construct a model for predicting Venetian Lagoon tide levels.
 
-TTM follows a multi-level architecture designed for flexibility and efficiency in various time series forecasting tasks (see Figure 1(a) in the [reference paper](https://arxiv.org/pdf/2401.03955.pdf)) and appears to be well-suited for problems like tide level forecasting where astronomical cycles and past weather patterns influence future water levels. TTM has proved to yeld optimal results with zero-shot evaluation (using only the pretrained model) or with few-shot fine tune and evaluation. 
+TinyTimeMixers (TTMs) are compact pre-trained models for Multivariate Time-Series Forecasting, open-sourced by IBM Research and available for download from HF or from the TSFM library. TTMs follow a multi-level architecture designed for flexibility and efficiency in various time series forecasting tasks (see Figure 1(a) in the [reference paper](https://arxiv.org/pdf/2401.03955.pdf)) and appears to be well-suited for problems like tide level forecasting where astronomical cycles and past weather patterns influence future water levels. TTM has proved to yeld optimal results with zero-shot evaluation (using only the pretrained model) or with few-shot fine tune and evaluation. 
 
 The idea is to include several relevant factors from the retrieved datasets, beyond tide level data, as input features for the model. These features encompass:
 
@@ -89,7 +86,7 @@ The idea is to include several relevant factors from the retrieved datasets, bey
 By incorporating these exogenous variables, the model can paint a more comprehensive picture of the forces affecting the lagoon's water level and enhance prediction accuracy.
 
 
-## Data Acquisition and Preprocessing
+## Data Acquisition and preparation
 
 The data for this project will be primarily sourced from the **Area Maree e Lagune** (Tide and Lagoon Area) of the **Istituto Superiore per la Protezione e la Ricerca Ambientale** (ISPRA) in Italy. ISPRA is a renowned research institute responsible for monitoring and managing water resources in Italy.
 
@@ -115,7 +112,7 @@ The data collected by the RMLV serves various purposes, including:
 
 The RMLV's rich and well-maintained dataset, coupled with ISPRA's expertise in water resource management, makes it an ideal source for developing a robust time series model to predict Venetian Lagoon tide levels.
 
-We provide a Jupyter Notebook designed to merge weather data from multiple datasets for the city of Venice, covering the years 2020 to 2022. The data includes level, wind speed, wind direction, pressure, temperature, and rain. The notebook leverages preprocessed and quality-controlled data downloaded from ISPRA's RMLV network, eliminating the need for extensive cleaning steps. The data is assumed to be spread across multiple text files, one for each year, and stored in separate directories based on the weather parameter (e.g., level, pressure, rain, etc.). 
+We provide a [Jupyter Notebook](https://github.com/matteorinalduzzi/TTM/blob/main/datasets/venice/create_venice_ds.ipynb) designed to merge weather data from multiple datasets for the city of Venice, covering the years 2020 to 2022. The data includes level, wind speed, wind direction, pressure, temperature, and rain. The notebook leverages preprocessed and quality-controlled data downloaded from ISPRA's RMLV network, eliminating the need for extensive cleaning steps. The data is assumed to be spread across multiple text files, one for each year, and stored in separate directories based on the weather parameter (e.g., level, pressure, rain, etc.). 
 
 The notebook performs the following steps:
 
@@ -145,10 +142,27 @@ The notebook performs the following steps:
      - `venice.csv`: Contains the entire merged dataset.
      - `venice_small.csv`: Contains a subset of the data where timestamps are restricted to every hour (i.e., minutes are either 0 or 30). 
 
-**TO DO: Riportare in questo notebook la parte di data transformation elaborata all'interno del notebook di tsfm**
+Once the dataset is created it is ready to be loaded and used for forecasting with the [ttm_venice_levels notebook](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb)
 
-## Model
 
+## Model inference and few-shots fine-tuning
+
+The [ttm_venice_levels notebook](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb) provides the code blocks needed for loading our dataset and performing inference and a small fine-tuning on the TTM base model.
+
+The notebook performs the following steps:
+
+1. **Imports and Definitions:**
+   - Necessary libraries like torch and tsfm tools are imported.
+   - A dictionary, `dataset_info`, is created to specify the directory location and column name for each weather parameter.
+   - A helper function, `load_datasets`, is defined to load data from a specific year and directory. It handles potential file exceptions and performs basic cleaning tasks.
+
+2. **Functions' definitions:**
+   - A data loader (`get_data`) function is defined for loading, splitting and pre-processing our dataset leveraging tools from the tsfm library.
+   - A `zeroshot_eval` function is defined for running the predictions against the TTM base model and plot the output against the test data partition.
+   - A `few_shot_finetune_eval` function is defined for fine-tuning the TTM base model using a 5% sample of our training data, inferencing against the tuned model and plot the forecasted data against the test data.
+
+3. **Training and inference:**
+   - A simple run of the previously defined functions in order to produce the expect output.
 
 ## Leveraging watson ML environments for running the model
 
