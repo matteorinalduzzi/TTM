@@ -38,9 +38,10 @@ Time Series Analysis can be applied in various forecasting problems:
 * **Weather forecasting:** Meteorological agencies use time series models incorporating temperature, pressure, and humidity data to predict future weather patterns.
 * **Inventory management:** Retailers can optimize stock levels by forecasting future demand using historical sales data and lead times.
 
-Traditionally, models explointing moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analyis, hereafter we propose a brief summary of the main models usually encountered in this field:
+Traditionally, models explointing moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analyis, hereafter we propose a brief summary of the main models usually encountered in this field (for a comprehensive review see R.J. Hyndman and G. Athanasopoulos - "Forecasting: principles and
+practice" - OTexts: Melbourne, Australia, 2021, [available here](https://otexts.com/fpp3/)):
 
-**rivedere i modelli, togliere reference ad articoli specifici**
+* **AR (AutoRegressive) Models:**
 
 * **ARIMA (Autoregressive Integrated Moving Average):** This model captures trends and seasonality by analyzing past values and residuals from the data.
 
