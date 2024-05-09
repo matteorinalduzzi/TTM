@@ -2,27 +2,26 @@
 
 ## Abstract 
 This article explores the application of foundation models for predicting tide levels in the Venice Lagoon.<br /><br />
-In particular, we leverage [Tiny Timeseries Mixers](https://huggingface.co/ibm/TTM), a family of foundational models for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demostrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain experties in action with ease.<br />
-Furthermore we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.<br /><br />The work leverages data retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica), two of the major institutional data providers for what concerns sea levels in the Venice Lagoon.<br /><br />
-The article is developed as follows:<br />
-firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the tecniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.<br /><br />
+In particular, we leverage [Tiny Timeseries Mixers](https://huggingface.co/ibm/TTM), a family of foundational models for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demonstrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain expertise in action with ease.<br />
+Furthermore, we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.<br /><br /> The work leverages data retrieved from the official [portal of the City of Venice](https://www.comune.venezia.it/it/content/centro-previsioni-è-segnalazioni-maree) and from [ISPRA Servizio Laguna di Venezia](https://www.venezia.isprambiente.it/rete-meteo-mareografica), two of the major institutional data providers for what concerns sea levels in the Venice Lagoon.<br /><br />
+The article is developed as follows: firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the techniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.<br /><br />
 The code for implementing this approach is provided in a [Jupyter notebook](ttm_venice_levels.ipynb).<br /><br />
-Our aim with this article is to that this approach offers a promising solution for time series forecasting tasks, particularly when combined with a user-friendly platform like watsonx. Specifically:
-1. **Feasibility of data science project:**  A data science project leveraging publicly available data and open-source models (TTM by IBM Research) was created to predict tide levels in the Venice Lagoon. 
-2. **Effectiveness of WatsonX platform:** The IBM watsonx platform provided a convenient environment for running the model tuning and predictions. The platform facilitated easy integration with the GitHub repository and seamless import of necessary artifacts within the machine learning service. 
+Our aim with this article is that this approach offers a promising solution for time series forecasting tasks, particularly when combined with a user-friendly platform like watsonx. Specifically:
+1. **Feasibility of data science project:** A data science project leveraging publicly available data and open-source models (TTM by IBM Research) was created to predict tide levels in the Venice Lagoon. 
+2. **Effectiveness of watsonX platform:** The IBM watsonx platform provided a convenient environment for running the model tuning and predictions. The platform facilitated easy integration with the GitHub repository and seamless import of necessary artifacts within the machine learning service. 
 
 
 ## Introduction
 
 The Venice Lagoon is a unique ecosystem where the city of Venice itself is built on a network of islands and canals. This beautiful setting comes with a challenge: fluctuating tide levels. Particularly high tides, known as "acqua alta," can flood parts of the city, impacting residents and infrastructure.
 
-Predicting these high tides accurately, but also giving indication on times for hifgh and low tides in the day, is crucial for flood forecasting and water management. By knowing the expected water level, authorities can activate flood barriers, issue warnings, and adjust transportation routes to minimize disruption.
+Predicting these high tides accurately, but also giving indication on times for high and low tides in the day, is crucial for flood forecasting and water management. By knowing the expected water level, authorities can activate flood barriers, issue warnings, and adjust transportation routes to minimize disruption.
 
 Such study is a two-step process, according to [ISPRA](https://www.venezia.isprambiente.it/modellistica). First, scientists separate out the predictable influence of the moon and sun using established methods. Then, they tackle the more chaotic effect of weather. Here, two approaches come into play. Statistical models analyze past data on tides, weather patterns, and even forecasts to find reliable connections and predict future surges. Deterministic models, on the other hand, use powerful computer simulations to mimic how the ocean responds to wind and pressure, calculating the surge across the entire Mediterranean.  
 
 By combining these methods, scientists can provide accurate short-term forecasts (12-48 hours) and a general idea of the tide's direction over longer periods (3-5 days). 
 
-In this context, we explore the use of a foundational model specifically developed to handle time series data for predicting sea levels in the Venice Lagoon. Such an approach allow us to consider multiple factors that influences tides without directly handling the complex statistical tecniques that are usually associated with multivariate forecasting. In doing so, we leverage not only astronomical cycles but also meteorological factors such as:
+In this context, we explore the use of a foundational model specifically developed to handle time series data for predicting sea levels in the Venice Lagoon. Such an approach allow us to consider multiple factors that influences tides without directly handling the complex statistical techniques that are usually associated with multivariate forecasting. In doing so, we leverage not only astronomical cycles but also meteorological factors such as:
 
 - Wind speed and direction
 - Atmospheric pressure
@@ -31,7 +30,7 @@ In this context, we explore the use of a foundational model specifically develop
 
 ## Time Series: a Powerful Tool for Forecasting
 
-Before diving into our project, it is useful to recall some of the basics of Time Series Analyis.<br /><br />
+Before diving into our project, it is useful to recall some basics of Time Series Analysis.<br /><br />
 Generally speaking, a time series is a collection of data points indexed in chronological order: imagine temperature readings taken every hour, or stock prices recorded daily - these are all examples of time series data. The power of Time Series Analysis lies in its ability to exploit the inherent temporal relationships within the data for forecasting purposes. 
 
 Time Series Analysis can be applied in various forecasting problems:
@@ -41,8 +40,8 @@ Time Series Analysis can be applied in various forecasting problems:
 * **Weather forecasting:** Meteorological agencies use time series models incorporating temperature, pressure, and humidity data to predict future weather patterns.
 * **Inventory management:** Retailers can optimize stock levels by forecasting future demand using historical sales data and lead times.
 
-Traditionally, models explointing moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analyis, hereafter we propose a brief summary of the main models usually encountered in this field (for a comprehensive review see R.J. Hyndman and G. Athanasopoulos - "Forecasting: principles and
-practice" - OTexts: Melbourne, Australia, 2021, [available here](https://otexts.com/fpp3/)):
+Traditionally, models exploiting moving averages, exponential smoothing and autoregressive techniques have dominated the field of time series analysis but with the advent of big data and advanced computational power, modern machine learning (notably, Deep Learning) techniques have come to the stage and started to gain attention. Without the aim to provide a comprehensive review of all the different statistical models and techniques applied in Time Series Analysis, hereafter we propose a brief summary of the main models usually encountered in this field (for a comprehensive review see R.J. Hyndman and G. Athanasopoulos - "Forecasting: principles and
+practice" - Texts: Melbourne, Australia, 2021, [available here](https://otexts.com/fpp3/)):
 
 * **Exponential Smoothing:** a family of models which us a decay factor to give more weight to recent observations and less weight to older observations. This model is particularly used for short-term forecasting (e.g. financial time series, where short-term trends and patterns are of particular interest) 
 
@@ -52,11 +51,11 @@ practice" - OTexts: Melbourne, Australia, 2021, [available here](https://otexts.
 
 * **ARMA (Autoregressive Integrated Moving Average):** these models an Autoregressive component (AR) with a Moving Average one (MA). By combining these two techniques, the ARMA model can capture both short-term and long-term dependencies in stationary time series data, making it suitable for various applications such as stock price prediction, demand forecasting, and signal processing. The order of the model, denoted as (p, q), specifies the number of lagged terms used in the autoregressive and moving average components, where p represents the number of autoregressive terms and q represents the number of moving average terms.
 
-* **ARIMA (Autoregressive Integrated Moving Average):**  ARIMA models are an extension of ARMA models that includes an additional integration term, which accounts for differencing in the time series data. Differencing is a technique used to make non-stationary time series stationary by removing trends and seasonality. By incorporating differencing into the model, ARIMA can handle more complex patterns and relationships in the data, making it particularly useful for time series data with missing values or outliers. 
+* **ARIMA (Autoregressive Integrated Moving Average):** ARIMA models are an extension of ARMA models that includes an additional integration term, which accounts for differencing in the time series data. Differencing is a technique used to make non-stationary time series stationary by removing trends and seasonality. By incorporating differencing into the model, ARIMA can handle more complex patterns and relationships in the data, making it particularly useful for time series data with missing values or outliers. 
 
 * **Deep Learning Architectures for TS Analysis:** Among the many deep learning applications to time series data developed in the last years, Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks emerge as the two main architectures used in this field. These models are particularly suited for capturing complex temporal patterns in data, leading to highly accurate forecasts especially for non-linear data. 
 
-* **Foundation Models for TS Analysis:** Recently, the rise of foundational models in various fields (notably NLP and Computer Vision) have brought interest in developing similar models and approaches in  time series analisys (e.g. [The Battle of time-series transforers](https://www.linkedin.com/pulse/ts-foundation-models-battle-time-series-vijay-ekambaram/)). In this context, IBM Research has  open-sourced Tiny Time Mixers, a class of models pre-trained on curated and diverse time series data that shows very good benchmark both on zero-shot inference and few-shot fine-tuning of the base model.
+* **Foundation Models for TS Analysis:** Recently, the rise of foundational models in various fields (notably NLP and Computer Vision) have brought interest in developing similar models and approaches in time series analysis (e.g. [The Battle of time-series transforers](https://www.linkedin.com/pulse/ts-foundation-models-battle-time-series-vijay-ekambaram/)). In this context, IBM Research has open-sourced Tiny Time Mixers, a class of models pre-trained on curated and diverse time series data that shows very good benchmark both on zero-shot inference and few-shot fine-tuning of the base model.
 
 When building a time series model, it's crucial to distinguish between two types of data: endogenous and exogenous variables.
 
@@ -71,7 +70,7 @@ Predicting tide levels in the Venice Lagoon is a prime example perfectly suited 
 * **Cyclical Nature:** Tides exhibit predictable daily and seasonal cycles that time series models can effectively capture.
 * **External Influences:** Meteorological factors like wind and atmospheric pressure significantly impact tide levels. Time series models can incorporate these external factors (exogenous variables) for more comprehensive forecasting.
 
-By analyzing historical data on wind patterns, rains' levels, temperature and atmospheric pressure (exogenous variables) as well as on the preavious sea levels (endogenous variable), time series models can provide predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
+By analyzing historical data on wind patterns, rains' levels, temperature and atmospheric pressure (exogenous variables) as well as on the previous sea levels (endogenous variable), time series models can provide predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
 
 ## Model Development with TSFM
 
@@ -123,6 +122,7 @@ The notebook performs the following steps:
    - Necessary libraries like pandas are imported.
    - A dictionary, `dataset_info`, is created to specify the directory location and column name for each weather parameter.
    - A helper function, `load_datasets`, is defined to load data from a specific year and directory. It handles potential file exceptions and performs basic cleaning tasks.
+   ![The notebook cell that gathers links from the website.](./images/fig1.png)
 
 2. **Load and Merge Data:**
    - Each weather dataset is loaded using the `load_datasets` function.
@@ -167,16 +167,94 @@ The notebook performs the following steps:
 3. **Training and inference:**
    - A simple run of the previously defined functions in order to produce the expect output.
 
-## Leveraging watson ML environments for running the model
+## Execute the notebook
 
-* Explain how to go from the cloning the code repository to creating a service to run the IBM Cloud
-* Discuss benefits of such environment such as governance, dataset assets...
-  
-## Model Evaluation and Results
+The provided notebook can be executed locally if you have the appropriate compute resources, or you can leverage a Platform-as-a-Service environment like watsonx.
+
+# How to run the notebook locally
+
+To run the notebook 'ttm_venice_levels.ipynb' locally in VS Code, you can follow these steps:
+1. **Clone the Repository**: Use git clone to download the repository to your local machine. For the TTM repository, you would run:
+   ```console
+   git clone https://github.com/matteorinalduzzi/TTM.git
+   cd TTM
+   ```
+2. **Install Dependencies**: Within TTM folder there are 2 notebooks: 'ttm_venice_levels.ipynb' is the main one while 'install_tsfm.ipynb' is the notebook that you need to execute to be able to experiment with the [tsfm library](https://github.com/ibm-granite/granite-tsfm). This notebook is setting up the environment for working with the tsfm library by cloning the repository, adjusting Python version requirements, and installing the necessary dependencies.
+
+3. **Run the Notebook Cells**: Execute the notebook and look at the results.
+
+# How to tun the notebook on watsonx.ai platform
+
+Multivariate time-series forecasting often involves complex mathematical computations and large amounts of data processing, especially when using machine learning models. Due to this, executing the Python notebook described in this article locally on a computer can be difficult and may not yield optimal results. In such cases, using cloud-platforms like watsonx may be more suitable alternatives.
+
+## Provision the environment
+In order to quickly access IBM watsonx, you can sign up for a free trial on the IBM Cloud platform: simply visit the [IBM watsonx webpage](https://www.ibm.com/it-it/watsonx), click on the “Try it for free” button, and follow the instruction to complete the registration process.
+
+For IBM Business Partners, watsonx can also be accessed through the IBM Technology Zone platform. For any detail on how to access the IBM Techzone platform and its associated policies, please contact an IBM representative.
+
+## Setup the environment
+After logging into watsonx, you need to first create a new project. A project is a collaborative workspace where you work with data and other assets to accomplish a particular goal. For a quick introduction on how to create a project in watsonx.ai, check out the [product documentation](https://www.ibm.com/docs/en/watsonx/saas?topic=projects-creating-project).
+
+Once the new project is created, you need to associate a Watson Machine Learning instance to the project. Watson Machine Learning is the ML engine provided with watsonx.ai. Note that if you reserved an environment within TechZone, an instance of WML is already provided. If you do not already have a WML instance, you can create a new one on IBM Cloud for free simply searching for Watson Machine Learning in the IBM Cloud Catalog and selecting a “lite” tier.
+
+In order to associate your WML instance, select the **Manage** tab of the project, click on **Services & integrations**, then on **Associate service** and finally choose the appropriate WML service instance.
+
+![Associate a new WML service](./images/AssociateWML.png)
+
+## GitHub Integration with watsonx (only if you have administrator permissions on the GitHub project)
+[Here]() you can find the procedure to link a watsonx project to a GitHub repository in order to back up notebooks for source code management. You can skip to the next step if your goal is to run this notebook or any other notebook that does not make part of a github repository that is not yours.
+
+## Import the notebook
+Open the watsonx project created previously, select the Assets tab and then click the New asset button: a new pop-up window will appear, presenting the various assets available for preparing data, work with foundational or traditional AI models and automate ML pipelines.
+![Create New Asset](./images/CreateNewAsset.png)
+
+Select 'Work with data and models in Python or R notebooks', then on the left panel open 'Local file' tab and upload manually the notebook or click on 'URL' tab and point to the [notebook](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels_watsonx.ipynb) in the GitHub repository. For both the cases it is important to select a runtime with at least one GPU if you want to make the notebook run in seconds instead of tens of minutes. Click on Create.
+
+![Import local notebook](./images/ImportNotebook.png)
+
+## Import the dataset to use in the notebook  
+This step describes the procedure to upload and use the dataset of this project within the IBM Cloud Object Storage instance that is associated with the workspace.
+
+Click on the button in the top right corner and then upload the dataset 'venice small.csv' that can be found [here](https://github.com/matteorinalduzzi/TTM/blob/main/datasets/venice/venice_small.csv).
+![Upload Asset To Project](./images/UploadAssetToProject.png)
+
+Click on the 'Code Snippets' and select 'Read data' to open the list of the assets available in the project.
+![Code Snippets](./images/CodeSnippets.png)
+
+Find the dataset file and select it.
+![Select Data](./images/SelectData.png)
+
+The last step is the creation of the credentials to access the dataset stored in the Cloud Object Storage. Select 'Load as Credentials' and then copy the output to the clipboard. Save the credentials in a text file and copy the credentials within the notebook.
+![Credentials](./images/Credentials.png)
+
+Credentials have a format like that:
+```
+credentials = {
+    'IBM_API_KEY_ID': '*******************************',
+    'IAM_SERVICE_ID': '*******************************',
+    'ENDPOINT': '*******************************',
+    'IBM_AUTH_ENDPOINT': '*******************************',
+    'BUCKET': '*******************************',
+    'FILE': '*******************************'
+}
+```
+
+## Run the notebook
+Execute the notebook by clicking on the Play button or by executing the code cell by cell.
+
+
+# Model Evaluation and Results
 
 While this article explores the application of TSFM for Venetian tide level prediction, it's important to acknowledge that we are not aiming to redefine established tide prediction models or propose ourselves as domain experts in Venetian tides or in time series modeling. Our focus lies on demonstrating a real-world use case for TSFM and the TTM model by leveraging the watsonx.ai platform. 
 
-That being said, we can still evaluate the model's performance to assess its qualitative effectiveness in predicting tide levels by looking at the *Predicted* towards *True* plots created by the notebook. More in-depth discussions on the validity of the results and the application of the time series model should probably be carried with better subject matter expertise. **TODO: ADD DIAGRAMS**
+That being said, we can still evaluate the model's performance to assess its qualitative effectiveness in predicting tide levels by looking at the *Predicted* towards *True* plots created by the notebook. More in-depth discussions on the validity of the results and the application of the time series model should probably be carried with better subject expertise. **TODO: ADD DIAGRAMS**
+
+The following pictures show the result of the evaluation using zero shot approach (first image) and few shot fine-tuning approach (second image).
+
+![Zero shot](./images/zeroshotsample.png)
+![Few shot](./images/fewshotsample.png)
+
+From a qualitative point of view it can be appreciated that the few shot fine-tuning evaluation brings to better results than the zero shot evaluation.
 
 We acknowledge that further refinement might be necessary. This includes exploring additional factors that could influence tide levels and potentially investigating more advanced TSFM architectures for enhanced accuracy. We are open to suggestions from domain experts in tide prediction and water management in Venice. Sharing the code (via Jupyter Notebook) fosters transparency and encourages collaboration for future improvements.
 
@@ -188,7 +266,7 @@ One key area for improvement lies in expanding the range of endogenous variables
 
 Furthermore, a comprehensive evaluation comparing TSFM against other time series forecasting models (e.g., ARIMA, LSTMs) is necessary. This evaluation should consider not only accuracy scores but also computational power requirements. Identifying the optimal model in terms of accuracy and efficiency is crucial for real-world deployments.
 
-To achieve a more in-depth evaluation of the TSFM model itself, leveraging  domain expertise on Venetian tide level phenomena would be beneficial.  A thorough understanding of the cyclical and episodic events that influence the lagoon's water levels would enable the creation of relevant use cases to benchmark the model's performance against the actual tide prediction models currently in place. This would provide valuable insights into the strengths and weaknesses of the TSFM approach in this specific context.
+To achieve a more in-depth evaluation of the TSFM model itself, leveraging domain expertise on Venetian tide level phenomena would be beneficial.  A thorough understanding of the cyclical and episodic events that influence the lagoon's water levels would enable the creation of relevant use cases to benchmark the model's performance against the actual tide prediction models currently in place. This would provide valuable insights into the strengths and weaknesses of the TSFM approach in this specific context.
 
 Finally, exploring advanced tuning strategies targeted at high-tide forecasting is an exciting avenue for future work. By focusing on this specific use case, we can potentially refine the TSFM model to deliver optimal results for accurately predicting these critical events. This could involve experimenting with hyperparameter optimization techniques or incorporating domain knowledge into the tuning process.
 
@@ -196,7 +274,7 @@ In conclusion, this work establishes a foundation for utilizing TSFM models in V
 
 ## Conclusion
 
-This article explored the application of Tiny Timeseries Mixers (TTM), a foundation model by IBM Research, for predicting tide levels in the Venice Lagoon. The project successfully demonstrated the feasibility of leveraging open-source models and publicly available data for time series forecasting tasks. Furthermore, the article showcased the IBM WatsonX platform's  capabilities for streamlining model development and deployment.
+This article explored the application of Tiny Timeseries Mixers (TTM), a foundation model by IBM Research, for predicting tide levels in the Venice Lagoon. The project successfully demonstrated the feasibility of leveraging open-source models and publicly available data for time series forecasting tasks. Furthermore, the article showcased the IBM WatsonX platform's capabilities for streamlining model development and deployment.
 
 The findings highlight the effectiveness of the TSFM-based model in predicting tide levels. This approach offers a promising solution, particularly when combined with a user-friendly platform like WatsonX. However, the importance of continuous improvement cannot be overstated.  
 
@@ -206,5 +284,5 @@ Ultimately, the goal is to refine the TSFM model for the specific use case of hi
 
 ## Appendix (Optional)
 
-* Include the Jupyter notebook code (or a link to the code repository) for implementing the model.
-* Provide any additional technical details or supplementary information relevant to the model development process.
+* Code repository: https://github.com/matteorinalduzzi/TTM
+* TODO: Provide any additional technical details or supplementary information relevant to the model development process.
