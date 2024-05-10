@@ -171,7 +171,7 @@ The notebook performs the following steps:
 
 The provided notebook can be executed locally if you have the appropriate compute resources, or you can leverage a Platform-as-a-Service environment like watsonx.
 
-# How to run the notebook locally
+### How to run the notebook locally
 
 To run the notebook [ttm_venice_levels.ipynb](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb) locally, you can follow these steps:
 1. **Clone the Repository**: Use git clone to download the repository to your local machine. For the TTM repository, you would run:
@@ -183,16 +183,16 @@ To run the notebook [ttm_venice_levels.ipynb](https://github.com/matteorinalduzz
 
 3. **Run the Notebook Cells**: Execute the notebook and look at the results.
 
-# How to tun the notebook on watsonx.ai platform
+### How to tun the notebook on watsonx.ai platform
 
 Multivariate time-series forecasting often involves complex mathematical computations and large amounts of data processing, especially when using machine learning models. Due to this, executing the Python notebook described in this article locally on a computer can be difficult and may not yield optimal results. In such cases, using cloud-platforms like watsonx may be more suitable alternatives.
 
-## Provision the environment
+#### Provision the environment
 In order to quickly access IBM watsonx, you can sign up for a free trial on the IBM Cloud platform: simply visit the [IBM watsonx webpage](https://www.ibm.com/it-it/watsonx), click on the “Try it for free” button, and follow the instruction to complete the registration process.
 
 For IBM Business Partners, watsonx can also be accessed through the IBM Technology Zone platform. For any detail on how to access the IBM Techzone platform and its associated policies, please contact an IBM representative.
 
-## Setup the environment
+#### Setup the environment
 After logging into watsonx, you need to first create a new project. A project is a collaborative workspace where you work with data and other assets to accomplish a particular goal. For a quick introduction on how to create a project in watsonx.ai, check out the [product documentation](https://www.ibm.com/docs/en/watsonx/saas?topic=projects-creating-project).
 
 Once the new project is created, you need to associate a Watson Machine Learning instance to the project. Watson Machine Learning is the ML engine provided with watsonx.ai. Note that if you reserved an environment within TechZone, an instance of WML is already provided. If you do not already have a WML instance, you can create a new one on IBM Cloud for free simply searching for Watson Machine Learning in the IBM Cloud Catalog and selecting a “lite” tier.
@@ -201,10 +201,10 @@ In order to associate your WML instance, select the **Manage** tab of the projec
 
 ![Associate a new WML service](./images/AssociateWML.png)
 
-## GitHub Integration with watsonx (only if you have administrator permissions on the GitHub project)
+#### GitHub Integration with watsonx (only if you have administrator permissions on the GitHub project)
 [Here]() you can find the procedure to link a watsonx project to a GitHub repository in order to back up notebooks for source code management. You can skip to the next step if your goal is to run this notebook or any other notebook that does not make part of a github repository that is yours.
 
-## Import the notebook
+#### Import the notebook
 Open the watsonx project created previously, select the Assets tab and then click the New asset button: a new pop-up window will appear, presenting the various assets available for preparing data, work with foundational or traditional AI models and automate ML pipelines.
 ![Create New Asset](./images/CreateNewAsset.png)
 
@@ -212,7 +212,7 @@ Select 'Work with data and models in Python or R notebooks', then on the left pa
 
 ![Import local notebook](./images/ImportNotebook.png)
 
-## Import the dataset to use in the notebook  
+#### Import the dataset to use in the notebook  
 This step describes the procedure to upload and use the dataset of this project within the IBM Cloud Object Storage instance that is associated with the workspace.
 
 Click on the button in the top right corner and then upload the dataset 'venice small.csv' that can be found [here](https://github.com/matteorinalduzzi/TTM/blob/main/datasets/venice/venice_small.csv).
@@ -239,11 +239,11 @@ credentials = {
 }
 ```
 
-## Run the notebook
+#### Run the notebook
 Execute the notebook by clicking on the Play button or by executing the code cell by cell.
 
 
-# Model Evaluation and Results
+## Model Evaluation and Results
 
 While this article explores the application of TSFM for Venetian tide level prediction, it's important to acknowledge that we are not aiming to redefine established tide prediction models or propose ourselves as domain experts in Venetian tides or in time series modeling. Our focus lies on demonstrating a real-world use case for TSFM and the TTM model by leveraging the watsonx.ai platform. 
 
@@ -282,6 +282,6 @@ Future work should focus on expanding the model's capabilities through a more co
 
 Ultimately, the goal is to refine the TSFM model for the specific use case of high-tide forecasting. By leveraging domain expertise and exploring advanced tuning strategies, we can strive to achieve optimal results for this critically important application.  Accurate tide predictions are paramount for flood mitigation strategies and ensuring the safety of Venice and its inhabitants. This work paves the way for further advancements in time series forecasting models, fostering a future where real-time data analysis empowers informed decision-making.
 
-## Appendix (Optional)
+## Appendix
 
 * Code and dataset repository: https://github.com/matteorinalduzzi/TTM
