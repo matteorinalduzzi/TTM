@@ -173,13 +173,13 @@ The provided notebook can be executed locally if you have the appropriate comput
 
 # How to run the notebook locally
 
-To run the notebook 'ttm_venice_levels.ipynb' locally in VS Code, you can follow these steps:
+To run the notebook [ttm_venice_levels.ipynb](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb) locally, you can follow these steps:
 1. **Clone the Repository**: Use git clone to download the repository to your local machine. For the TTM repository, you would run:
    ```console
    git clone https://github.com/matteorinalduzzi/TTM.git
    cd TTM
    ```
-2. **Install Dependencies**: Within TTM folder there are 2 notebooks: 'ttm_venice_levels.ipynb' is the main one while 'install_tsfm.ipynb' is the notebook that you need to execute to be able to experiment with the [tsfm library](https://github.com/ibm-granite/granite-tsfm). This notebook is setting up the environment for working with the tsfm library by cloning the repository, adjusting Python version requirements, and installing the necessary dependencies.
+2. **Install Dependencies**: Within TTM folder there are 3 notebooks: 'ttm_venice_levels.ipynb' is the main one while 'install_tsfm.ipynb' is the notebook that you need to execute to be able to experiment with the [tsfm library](https://github.com/ibm-granite/granite-tsfm). This notebook is setting up the environment for working with the tsfm library by cloning the repository, adjusting Python version requirements, and installing the necessary dependencies. Finally, the third notebook will be analyzed in the next section and is intended to run within watsonx platform. 
 
 3. **Run the Notebook Cells**: Execute the notebook and look at the results.
 
@@ -202,7 +202,7 @@ In order to associate your WML instance, select the **Manage** tab of the projec
 ![Associate a new WML service](./images/AssociateWML.png)
 
 ## GitHub Integration with watsonx (only if you have administrator permissions on the GitHub project)
-[Here]() you can find the procedure to link a watsonx project to a GitHub repository in order to back up notebooks for source code management. You can skip to the next step if your goal is to run this notebook or any other notebook that does not make part of a github repository that is not yours.
+[Here]() you can find the procedure to link a watsonx project to a GitHub repository in order to back up notebooks for source code management. You can skip to the next step if your goal is to run this notebook or any other notebook that does not make part of a github repository that is yours.
 
 ## Import the notebook
 Open the watsonx project created previously, select the Assets tab and then click the New asset button: a new pop-up window will appear, presenting the various assets available for preparing data, work with foundational or traditional AI models and automate ML pipelines.
@@ -224,7 +224,7 @@ Click on the 'Code Snippets' and select 'Read data' to open the list of the asse
 Find the dataset file and select it.
 ![Select Data](./images/SelectData.png)
 
-The last step is the creation of the credentials to access the dataset stored in the Cloud Object Storage. Select 'Load as Credentials' and then copy the output to the clipboard. Save the credentials in a text file and copy the credentials within the notebook.
+The last step is the creation of the credentials to access the dataset stored in the Cloud Object Storage. Select 'Load as Credentials' and then copy the output to the clipboard. Copy the credentials within the appropriate section of the notebook.
 ![Credentials](./images/Credentials.png)
 
 Credentials have a format like that:
@@ -247,9 +247,9 @@ Execute the notebook by clicking on the Play button or by executing the code cel
 
 While this article explores the application of TSFM for Venetian tide level prediction, it's important to acknowledge that we are not aiming to redefine established tide prediction models or propose ourselves as domain experts in Venetian tides or in time series modeling. Our focus lies on demonstrating a real-world use case for TSFM and the TTM model by leveraging the watsonx.ai platform. 
 
-That being said, we can still evaluate the model's performance to assess its qualitative effectiveness in predicting tide levels by looking at the *Predicted* towards *True* plots created by the notebook. More in-depth discussions on the validity of the results and the application of the time series model should probably be carried with better subject expertise. **TODO: ADD DIAGRAMS**
+That being said, we can still evaluate the model's performance to assess its qualitative effectiveness in predicting tide levels by looking at the *Predicted* towards *True* plots created by the notebook. More in-depth discussions on the validity of the results and the application of the time series model should probably be carried with better subject expertise.
 
-The following pictures show the result of the evaluation using zero shot approach (first image) and few shot fine-tuning approach (second image).
+The following pictures show the result of the evaluation using zero shot approach (first image) and few shot fine-tuning approach (second image). The solid blue line represents the true values of tide levels over time while the dashed orange line represents the predicted values from the algorithms.
 
 ![Zero shot](./images/zeroshotsample.png)
 ![Few shot](./images/fewshotsample.png)
@@ -284,5 +284,4 @@ Ultimately, the goal is to refine the TSFM model for the specific use case of hi
 
 ## Appendix (Optional)
 
-* Code repository: https://github.com/matteorinalduzzi/TTM
-* TODO: Provide any additional technical details or supplementary information relevant to the model development process.
+* Code and dataset repository: https://github.com/matteorinalduzzi/TTM
