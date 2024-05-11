@@ -122,7 +122,6 @@ The notebook performs the following steps:
    - Necessary libraries like pandas are imported.
    - A dictionary, `dataset_info`, is created to specify the directory location and column name for each weather parameter.
    - A helper function, `load_datasets`, is defined to load data from a specific year and directory. It handles potential file exceptions and performs basic cleaning tasks.
-   ![The notebook cell that gathers links from the website.](./images/fig1.png)
 
 2. **Load and Merge Data:**
    - Each weather dataset is loaded using the `load_datasets` function.
