@@ -282,6 +282,6 @@ Future work should focus on expanding the model's capabilities through a more co
 
 Ultimately, the goal is to refine the TSFM model for the specific use case of high-tide forecasting. By leveraging domain expertise and exploring advanced tuning strategies, we can strive to achieve optimal results for this critically important application.  Accurate tide predictions are paramount for flood mitigation strategies and ensuring the safety of Venice and its inhabitants. This work paves the way for further advancements in time series forecasting models, fostering a future where real-time data analysis empowers informed decision-making.
 
-## Appendix (Optional)
+## Appendix
 
 * Code and dataset repository: https://github.com/matteorinalduzzi/TTM
