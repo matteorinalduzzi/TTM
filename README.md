@@ -1,3 +1,4 @@
+![The banner reproducing a time series graph that resembles Venice skyline inspired by sea tide levels](./images/TTM.banner.png)
 # Predicting Venetian Lagoon Tide Levels with Multivariate Time Series Modeling
 
 ## Abstract 
