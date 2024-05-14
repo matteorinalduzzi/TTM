@@ -1,8 +1,11 @@
 ![The banner reproducing a time series graph that resembles Venice skyline inspired by sea tide levels](./images/TTM.banner.png)
 # Predicting Venetian Lagoon Tide Levels with Multivariate Time Series Modeling
 
+*[Paolo Bianchini](https://github.com/paolob67), [David Proietti](https://github.com/proz92), [Matteo Rinalduzzi](https://github.com/matteorinalduzzi)*
+
 ## Abstract 
-This article explores the application of foundation models for predicting tide levels in the Venice Lagoon.<br /><br />
+This article explores the application of foundation models for predicting tide levels in the Venice Lagoon.
+
 In particular, we leverage [ibm-granite/granite-timeseries-ttm-v1](https://huggingface.co/ibm-granite/granite-timeseries-ttm-v1) (Tiny Time Mixer or TTM), a foundational model for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demonstrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain expertise in action with ease. TTM is part of the wider [IBM Granite](https://huggingface.co/ibm-granite) foundation model family that IBM made available on Hugging Face for the open-source community and that also includes language and code.
 
 Furthermore, we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.
