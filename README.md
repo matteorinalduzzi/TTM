@@ -284,4 +284,5 @@ Ultimately, the goal is to refine the TSFM model for the specific use case of hi
 
 ## Appendix
 
-* Code and dataset repository: https://github.com/matteorinalduzzi/TTM
+* Code and Dataset Repository: https://github.com/matteorinalduzzi/TTM
+* Granite Time Series Models Collection on HF: https://huggingface.co/collections/ibm-granite/granite-time-series-models-663a90c6a2da73482bce3dc6
