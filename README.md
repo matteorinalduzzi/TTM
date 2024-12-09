@@ -6,7 +6,7 @@
 ## Abstract 
 This article explores the application of foundation models for predicting tide levels in the Venice Lagoon.
 
-In particular, we leverage [ibm-granite/granite-timeseries-ttm-v1](https://huggingface.co/ibm-granite/granite-timeseries-ttm-v1) (Tiny Time Mixer or TTM), a foundational model for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demonstrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain expertise in action with ease. TTM is part of the wider [IBM Granite](https://huggingface.co/ibm-granite) foundation model family that IBM made available on Hugging Face for the open-source community and that also includes language and code.
+In particular, we leverage [ibm-granite/granite-timeseries-ttm-r2](https://huggingface.co/ibm-granite/granite-timeseries-ttm-v1) (Tiny Time Mixer or TTM), a foundational model for time series forecasting developed and open-sourced by [IBM Research](https://arxiv.org/pdf/2401.03955.pdf), in order to demonstrate how foundation models could democratize access to time series forecasting technologies, allowing SMEs with limited statistical knowledge to put their domain expertise in action with ease. TTM is part of the wider [IBM Granite](https://huggingface.co/ibm-granite) foundation model family that IBM made available on Hugging Face for the open-source community and that also includes language and code.
 
 Furthermore, we demonstrate how such models can be easily deployed and run on the [IBM watsonx platform](https://www.ibm.com/watsonx) so to streamline the process and unlock additional benefits such as proper AI governance.
 
@@ -14,7 +14,7 @@ The work leverages data retrieved from the official [portal of the City of Venic
 
 The article is developed as follows: firstly we provide a brief overview of the high tides phenomenon in the Venice Lagoon and the techniques usually leveraged for estimating the sea level; secondly, we describe the process of data acquisition, data cleaning and data preparation performed in order to obtain the input datasets for our models; then we show how to use TTM models for both one-shot inference against the base pre-trained model and few-shot fine-tuning based on a sample of our data; finally, we present the obtained results, discuss the possible implications of the use of foundational models in time series forecasting and address how the current work could be expanded.
 
-The code for implementing this approach is provided in a [Jupyter notebook](ttm_venice_levels.ipynb).
+The code for implementing this approach is provided in the Jupyter Notebooks in this repository.
 
 Our aim with this article is that this approach offers a promising solution for time series forecasting tasks, particularly when combined with a user-friendly platform like watsonx. Specifically:
 1. **Feasibility of data science project:** A data science project leveraging publicly available data and open-source models (TTM by IBM Research) was created to predict tide levels in the Venice Lagoon. 
@@ -97,7 +97,6 @@ The idea is to include several relevant factors from the retrieved datasets, bey
 
 By incorporating these exogenous variables, the model can paint a more comprehensive picture of the forces affecting the lagoon's water level and enhance prediction accuracy.
 
-
 ## Data Acquisition and preparation
 
 The data for this project will be primarily sourced from the **Area Maree e Lagune** (Tide and Lagoon Area) of the **Istituto Superiore per la Protezione e la Ricerca Ambientale** (ISPRA) in Italy. ISPRA is a renowned research institute responsible for monitoring and managing water resources in Italy.
@@ -154,14 +153,13 @@ The notebook performs the following steps:
      - `venice.csv`: Contains the entire merged dataset.
      - `venice_small.csv`: Contains a subset of the data where timestamps are restricted to every hour (i.e., minutes are either 0 or 30). 
 
-Once the dataset is created it is ready to be loaded and used for forecasting with the [ttm_venice_levels notebook](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb)
-
+Once the dataset is created it is ready to be loaded and used for forecasting with the different Jupiter Notebooks provided in this repository.
 
 ## Model inference and few-shots fine-tuning
 
-The [ttm_venice_levels notebook](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb) provides the code blocks needed for loading our dataset and performing inference and a small fine-tuning on the TTM base model.
+The various Jupiter Notebooks provide the code blocks needed for loading our dataset and performing inference and a small fine-tuning on the TTM base model.
 
-The notebook performs the following steps:
+The notebooks perform the following steps:
 
 1. **Imports and Definitions:**
    - Necessary libraries like torch and tsfm tools are imported.
@@ -178,17 +176,18 @@ The notebook performs the following steps:
 
 ## Execute the notebook
 
-The provided notebook can be executed locally if you have the appropriate compute resources, or you can leverage a Platform-as-a-Service environment like watsonx.
+The provided notebooks can be executed locally if you have the appropriate compute resources, or you can leverage a Platform-as-a-Service environment like watsonx.
 
 ### How to run the notebook locally
 
-To run the notebook [ttm_venice_levels.ipynb](https://github.com/matteorinalduzzi/TTM/blob/main/ttm_venice_levels.ipynb) locally, you can follow these steps:
+To run the notebooks locally, you can follow these steps:
+
 1. **Clone the Repository**: Use git clone to download the repository to your local machine. For the TTM repository, you would run:
    ```console
    git clone https://github.com/matteorinalduzzi/TTM.git
    cd TTM
    ```
-2. **Install Dependencies**: Within TTM folder there are 3 notebooks: 'ttm_venice_levels.ipynb' is the main one while 'install_tsfm.ipynb' is the notebook that you need to execute to be able to experiment with the [tsfm library](https://github.com/ibm-granite/granite-tsfm). This notebook is setting up the environment for working with the tsfm library by cloning the repository, adjusting Python version requirements, and installing the necessary dependencies. Finally, the third notebook will be analyzed in the next section and is intended to run within watsonx platform. 
+2. **Install Dependencies**: Run the [installation notebook](https://github.com/matteorinalduzzi/TTM/blob/main/install_tsfm.ipynb) in order to be able to experiment with the [tsfm library](https://github.com/ibm-granite/granite-tsfm). This notebook is setting up the environment for working with the tsfm library by cloning the repository, adjusting Python version requirements, and installing the necessary dependencies. 
 
 3. **Run the Notebook Cells**: Execute the notebook and look at the results.
 
@@ -265,7 +264,7 @@ The following pictures show the result of the evaluation using zero shot approac
 
 From a qualitative point of view it can be appreciated that the few shot fine-tuning evaluation brings to better results than the zero shot evaluation.
 
-We acknowledge that further refinement might be necessary. This includes exploring additional factors that could influence tide levels and potentially investigating more advanced TSFM architectures for enhanced accuracy. We are open to suggestions from domain experts in tide prediction and water management in Venice. Sharing the code (via Jupyter Notebook) fosters transparency and encourages collaboration for future improvements.
+We acknowledge that further refinement might be necessary. This includes exploring additional factors that could influence tide levels and potentially investigating more advanced TSFM architectures for enhanced accuracy. We are open to suggestions from domain experts in tide prediction and water management in Venice. We're sharing the code (via Jupyter Notebook) hoping this could help foster transparency and encourage collaboration for future improvements.
 
 ## Discussion and Future Work
 
@@ -277,7 +276,7 @@ Furthermore, a comprehensive evaluation comparing TSFM against other time series
 
 To achieve a more in-depth evaluation of the TSFM model itself, leveraging domain expertise on Venetian tide level phenomena would be beneficial.  A thorough understanding of the cyclical and episodic events that influence the lagoon's water levels would enable the creation of relevant use cases to benchmark the model's performance against the actual tide prediction models currently in place. This would provide valuable insights into the strengths and weaknesses of the TSFM approach in this specific context.
 
-Finally, exploring advanced tuning strategies targeted at high-tide forecasting is an exciting avenue for future work. By focusing on this specific use case, we can potentially refine the TSFM model to deliver optimal results for accurately predicting these critical events. This could involve experimenting with hyperparameter optimization techniques or incorporating domain knowledge into the tuning process.
+Finally, exploring advanced tuning strategies targeted at high-tide forecasting would be an exciting avenue for future work. By focusing on this specific use case, we can potentially refine the TSFM model to deliver optimal results for accurately predicting these critical events. This could involve experimenting with hyperparameter optimization techniques or incorporating domain knowledge into the tuning process.
 
 In conclusion, this work establishes a foundation for utilizing TSFM models in Venetian Lagoon tide level prediction. By expanding the variable set, conducting comparative evaluations, and implementing targeted tuning strategies, we can further enhance the model's accuracy and effectiveness in this crucial application. 
 
