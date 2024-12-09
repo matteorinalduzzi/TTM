@@ -1,4 +1,6 @@
 *.DS_Store
-/tsfm
+/granite-tsfm
+/temp
+/ttm_finetuned_models
 *logs
 datasets/venice/.DS_Store
