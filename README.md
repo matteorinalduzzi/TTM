@@ -271,7 +271,7 @@ We acknowledge that further refinement might be necessary. This includes explori
 
 This work demonstrates the potential of TSFM models for predicting Venetian Lagoon tide levels. However, several avenues exist for further exploration and refinement.
 
-One key area for improvement lies in expanding the range of endogenous variables considered. By incorporating additional factors that may influence water levels, such as astronomical phenomena (e.g., lunar phases) or even seismic activity, we can potentially enhance the model's accuracy.  A crucial step would be to analyze the impact of each variable on the forecast and compare these findings with existing knowledge of the lagoon's physics. This would allow us to prioritize the most influential variables and tailor the model accordingly.
+One key area for improvement lies in expanding the range of factors influencing the phenomenon of interest. By incorporating additional factors that may influence water levels, such as astronomical phenomena (e.g., lunar phases) or even seismic activity, we can potentially enhance the model's accuracy.  A crucial step would be to analyze the impact of each variable on the forecast and compare these findings with existing knowledge of the lagoon's physics. This would allow us to prioritize the most influential variables and tailor the model accordingly.
 
 Furthermore, a comprehensive evaluation comparing TSFM against other time series forecasting models (e.g., ARIMA, LSTMs) is necessary. This evaluation should consider not only accuracy scores but also computational power requirements. Identifying the optimal model in terms of accuracy and efficiency is crucial for real-world deployments.
 
