@@ -260,6 +260,7 @@ That being said, we can still evaluate the model's performance to assess its qua
 The following pictures show the result of the evaluation using zero shot approach (first image) and few shot fine-tuning approach (second image). The solid blue line represents the true values of tide levels over time while the dashed orange line represents the predicted values from the algorithms.
 
 ![Zero shot](./images/zeroshotsample.png)
+
 ![Few shot](./images/fewshotsample.png)
 
 From a qualitative point of view it can be appreciated that the few shot fine-tuning evaluation brings to better results than the zero shot evaluation.
