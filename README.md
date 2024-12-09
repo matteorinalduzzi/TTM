@@ -80,7 +80,7 @@ Predicting tide levels in the Venice Lagoon is a prime example perfectly suited 
 * **Cyclical Nature:** Tides exhibit predictable daily and seasonal cycles that time series models can effectively capture.
 * **External Influences:** Meteorological factors like wind and atmospheric pressure significantly impact tide levels. Time series models can incorporate these external factors (exogenous variables) for more comprehensive forecasting.
 
-By analyzing historical data on wind patterns, rains' levels, temperature and atmospheric pressure (exogenous variables) as well as on the previous sea levels (endogenous variable), time series models can provide predictions of future lagoon water levels (endogenous variable). This information is crucial for flood forecasting, allowing authorities to implement preventative measures and ensure the safety of Venice and its inhabitants.  
+By analyzing historical data on wind patterns, rains' levels, temperature and atmospheric pressure (exogenous variables) as well as on the previous sea levels (endogenous variable), time series models can provide predictions of future lagoon water levels.
 
 ## Model Development with TSFM
 
